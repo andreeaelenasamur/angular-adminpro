@@ -1,20 +1,21 @@
 <div class="row w-75">
   <div class="col-6">
-    <div class="card">
-      <div class="card-body">
+    <app-dona title="Ventas" [labels]="labels1" [data]="data1"></app-dona>
+  </div>
 
-        <h3>Sales</h3>
-
-        <div style="display: block">
-          <canvas
-            baseChart
-            class="chart"
-            [data]="doughnutChartData"
-            [type]="doughnutChartType"
-          >
-          </canvas>
-        </div>
-      </div>
-    </div>
+  <div class="col-6">
+    <app-dona title="Compras"></app-dona>
   </div>
 </div>
+
+<div class="row w-75">
+  <div class="col-6">
+    <app-dona title="Cambios"></app-dona>
+  </div>
+
+  <div class="col-6">
+    <app-dona title="Compras 2"></app-dona>
+  </div>
+</div>
+
+<!-- [data]="labels1.datasets" -->
