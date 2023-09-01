@@ -7,10 +7,18 @@
         <div class="progress m-t-20">
           <div
             class="progress-bar bg-primary progress-bar-striped active"
-            style="width: 50%; height: 10px"
-            role="progressbar"
-          >
-            <span class="sr-only">85% Complete (success)</span>
+            style="height: 5px"
+            role="progressbar">
+            <!-- [style.width]="getPorcentaje" -->
+          </div>
+        </div>
+
+        <div class="progress m-t-20">
+          <div
+            class="progress-bar bg-info progress-bar-striped active"
+            style="height: 5px"
+            role="progressbar">
+            <!-- [style.width]="getPorcentaje" -->
           </div>
         </div>
       </div>
@@ -22,28 +30,16 @@
   <div class="col-6">
     <div class="card">
       <div class="card-body">
-        <div class="input-group">
-          <span class="input-group-btn">
-            <button class="btn btn-primary" type="button">
-              <i class="fa fa-minus"></i>
-            </button>
-          </span>
-
-          <input type="text" class="form-control" placeholder="Product name" />
-
-          <span class="input-group-btn">
-            <button class="btn btn-primary" type="button">
-              <i class="fa fa-plus"></i>
-            </button>
-          </span>
-        </div>
+        <app-incrementador></app-incrementador>
       </div>
     </div>
   </div>
 
   <div class="col-6">
     <div class="card">
-      <div class="card-body">2</div>
+      <div class="card-body">
+        <app-incrementador></app-incrementador>
+      </div>
     </div>
   </div>
 </div>
