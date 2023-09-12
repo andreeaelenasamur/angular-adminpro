@@ -14,8 +14,8 @@ export class LoginComponent {
   public formSubmitted = false;
 
   public loginForm: any = this.fb.group({
-    email: ['test100@gmail.com', [Validators.required, Validators.email] ],
-    password: ['123456', Validators.required ],
+    email: [localStorage.getItem('email') || '', [Validators.required, Validators.email] ],
+    password: ['', Validators.required ],
     remember: [false]
   });
 
@@ -32,7 +32,16 @@ export class LoginComponent {
 
     this.usuarioService.login(this.loginForm.value)
       .subscribe( resp => {
+
+        if( this.loginForm.get('remember').value ) {
+          localStorage.setItem('email', this.loginForm.get('email').value );
+        } else {
+          localStorage.removeItem('email');
+
+        }
+
         console.log(resp)
+
       }, (err) => {
         Swal.fire('Error', err.error.msg, 'error');
       } )
