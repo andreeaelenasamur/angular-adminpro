@@ -1,15 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
 import Swal from 'sweetalert2';
+
+declare const google: any;
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements AfterViewInit {
+
+  @ViewChild('googleBtn') googleBtn: ElementRef | any;
 
   public formSubmitted = false;
 
@@ -26,6 +30,28 @@ export class LoginComponent {
     private usuarioService: UsuarioService
   ) {
 
+  }
+
+  ngAfterViewInit(): void {
+    this.googleInit();
+  }
+
+  googleInit() {
+    google.accounts.id.initialize({
+      client_id:
+        "925612984899-clbj00s5h37d6gvo8vg9o0di9fm8vr0g.apps.googleusercontent.com",
+      callback: this.handleCredentialResponse,
+    });
+
+    google.accounts.id.renderButton(
+      // document.getElementById("buttonDiv"),
+      this.googleBtn.nativeElement,
+      { theme: "outline", size: "large" } // customization attributes
+    );
+  }
+
+  handleCredentialResponse( response: any ) {
+    console.log("Encoded JWT ID token: " + response.credential);
   }
 
   login(){
