@@ -1,9 +1,10 @@
-import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
 import Swal from 'sweetalert2';
 
+// declare const gapi: any;
 declare const google: any;
 
 @Component({
@@ -11,11 +12,12 @@ declare const google: any;
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements AfterViewInit {
+export class LoginComponent implements AfterViewInit{
 
   @ViewChild('googleBtn') googleBtn: ElementRef | any;
 
   public formSubmitted = false;
+  public auth2: any;
 
   public loginForm: any = this.fb.group({
     email: [localStorage.getItem('email') || '', [Validators.required, Validators.email] ],
@@ -27,11 +29,11 @@ export class LoginComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private ngZone: NgZone
   ) {
 
   }
-
   ngAfterViewInit(): void {
     this.googleInit();
   }
@@ -55,7 +57,9 @@ export class LoginComponent implements AfterViewInit {
     this.usuarioService.loginGoogle(response.credential)
       .subscribe(resp =>{
         // console.log({login: resp})
-        this.router.navigateByUrl('/');
+        this.ngZone.run( () => {
+          this.router.navigateByUrl('/');
+        })
       })
   }
 
@@ -71,7 +75,7 @@ export class LoginComponent implements AfterViewInit {
 
         }
 
-        console.log(resp)
+        this.router.navigateByUrl('/');
 
       }, (err) => {
         Swal.fire('Error', err.error.msg, 'error');
