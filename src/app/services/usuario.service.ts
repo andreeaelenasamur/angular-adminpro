@@ -23,11 +23,21 @@ export class UsuarioService {
       this.googleInit()
      }
 
-    googleInit() {
+  googleInit() {
+
+    return new Promise<void>( resolve => {
+      console.log('google init')
+
       google.accounts.id.initialize({
         client_id:
           "925612984899-clbj00s5h37d6gvo8vg9o0di9fm8vr0g.apps.googleusercontent.com",
-      });}
+      });
+
+      resolve();
+    });
+
+
+  }
 
   logout() {
     localStorage.removeItem('token');

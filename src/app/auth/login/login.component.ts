@@ -38,7 +38,7 @@ export class LoginComponent implements AfterViewInit{
     this.googleInit();
   }
 
-  googleInit() {
+   googleInit() {
     google.accounts.id.initialize({
       client_id:
         "925612984899-clbj00s5h37d6gvo8vg9o0di9fm8vr0g.apps.googleusercontent.com",
