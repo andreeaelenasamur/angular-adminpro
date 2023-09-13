@@ -7,14 +7,35 @@ import { environment } from 'src/environments/environment';
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { LoginForm } from '../interfaces/login-form.interface';
 import { Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
 
+declare const google: any;
 const base_url = environment.base_url;
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  constructor( private http: HttpClient ) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+    ) {
+      this.googleInit()
+     }
+
+    googleInit() {
+      google.accounts.id.initialize({
+        client_id:
+          "925612984899-clbj00s5h37d6gvo8vg9o0di9fm8vr0g.apps.googleusercontent.com",
+      });}
+
+  logout() {
+    localStorage.removeItem('token');
+
+    google.accounts.id.revoke('andelenasamur@gmail.com', () => {
+      this.router.navigateByUrl('/login');
+    })
+  }
 
   validarToken(): Observable<boolean> {
     const token = localStorage.getItem('token') || '';
