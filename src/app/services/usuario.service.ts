@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { LoginForm } from '../interfaces/login-form.interface';
-import { Observable, of } from 'rxjs';
-import { Router } from '@angular/router';
+import { Usuario } from '../models/usuario.model';
 
 declare const google: any;
 const base_url = environment.base_url;
@@ -15,6 +16,8 @@ const base_url = environment.base_url;
   providedIn: 'root'
 })
 export class UsuarioService {
+
+  public usuario!: Usuario;
 
   constructor(
     private http: HttpClient,
@@ -56,6 +59,11 @@ export class UsuarioService {
       }
     }).pipe(
       tap( (resp: any) => {
+        const { email, google, nombre, role, img, uid } = resp.usuario;
+
+        this.usuario = new Usuario(nombre, email, '', img, google, role, uid);
+
+        this.usuario.imprimirUsuario();
         localStorage.setItem('token', resp.token);
       }),
       map( resp => true ),

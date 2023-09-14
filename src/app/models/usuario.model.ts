@@ -12,6 +12,10 @@ export class Usuario {
 
   }
 
+  imprimirUsuario() {
+    console.log(this.nombre);
+  }
+
 
 
 }
