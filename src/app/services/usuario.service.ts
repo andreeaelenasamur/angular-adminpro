@@ -63,7 +63,6 @@ export class UsuarioService {
 
         this.usuario = new Usuario(nombre, email, '', img, google, role, uid);
 
-        this.usuario.imprimirUsuario();
         localStorage.setItem('token', resp.token);
       }),
       map( resp => true ),
