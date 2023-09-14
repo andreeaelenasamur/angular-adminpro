@@ -331,7 +331,9 @@
                   </div>
                   <div class="u-text">
                     <h4>{{usuario.nombre}}</h4>
-                    <p class="text-muted">{{usuario.email}}</p>
+                    <p class="text-muted">
+                      {{usuario.email | slice:0:18 }}{{ (usuario.email.length > 18) ? '...': '' }}
+                    </p>
                     <a
                       href="pages-profile.html"
                       class="btn btn-rounded btn-danger btn-sm"
