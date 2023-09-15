@@ -130,7 +130,6 @@ export class UsuarioService {
   }
 
   cargarUsuarios( desde: number = 0 ) {
-    // http://localhost:3000/api/usuarios?desde=5
     const url = `${base_url}/usuarios?desde=${desde}`
     return this.http.get<CargarUsuario>( url, this.headers );
 
