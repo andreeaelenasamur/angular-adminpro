@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Hospital } from 'src/app/models/hospital.model';
 
 import { HospitalService } from 'src/app/services/hospital.service';
 
@@ -10,13 +11,24 @@ import { HospitalService } from 'src/app/services/hospital.service';
 })
 export class HospitalesComponent implements OnInit{
 
+  public hospitales: Hospital[] = [];
+  public cargando: boolean = true;
+
   constructor( private hospitalService: HospitalService ) {}
 
   ngOnInit(): void {
+    this.cargarHospitales();
+  }
+
+  cargarHospitales() {
+    this.cargando = true;
+
     this.hospitalService.cargarHospitales()
     .subscribe( hospitales => {
-      console.log(hospitales)
+      this.cargando = false;
+      this.hospitales = hospitales;
     })
+
   }
 
 }
