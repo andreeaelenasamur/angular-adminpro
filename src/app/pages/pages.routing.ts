@@ -13,6 +13,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 
 // Mantenimientos
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
+import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
 
 const routes: Routes = [
   {
@@ -29,8 +30,8 @@ const routes: Routes = [
       { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil de usuario' } },
 
       // Mantenimientos
-      { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Usuario de aplicación' } },
-      // { path: 'hospitales', component: UsuariosComponent, data: { titulo: 'Usuario de aplicación' } },
+      { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento de Usuarios' } },
+      { path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Mantenimiento de Hospitales' } },
       // { path: 'medicos', component: UsuariosComponent, data: { titulo: 'Usuario de aplicación' } },
 
     ]
