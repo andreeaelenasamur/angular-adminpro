@@ -11,6 +11,14 @@
 
               <h3>Seleccione una imagen</h3>
 
+              <div class="text-center">
+                <img *ngIf="!imgTemp" [src]="modalImagenService.img" class="img-avatar" alt="">
+                <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar" alt="">
+              </div>
+
+              <br>
+              <input type="file" (change)="cambiarImagen($any($event.target).files[0])" />
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" (click)="cerrarModal()">Cancelar</button>
