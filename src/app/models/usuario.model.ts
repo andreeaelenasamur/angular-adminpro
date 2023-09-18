@@ -25,7 +25,6 @@ export class Usuario {
       return `${base_url}/upload/usuarios/${this.img}`;
     } else {
       return `${base_url}/upload/usuarios/no-image`;
-
     }
   }
 

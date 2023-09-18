@@ -141,7 +141,6 @@ export class UsuarioService {
           };
         })
       )
-
   }
 
   eliminarUsuario(usuario: Usuario) {
