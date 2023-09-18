@@ -25,9 +25,25 @@
 <div class="row" *ngIf="!cargando">
   <div class="col-12">
     <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Hospitales {{hospitales.length}}</h4>
-            <h6 class="card-subtitle">Hospitales registrados en mi aplicación</h6>
+      <div class="card-body">
+
+        <div class="row">
+          <div class="col-8">
+            <h4 class="card-title">Hospitales ({{hospitales.length}})</h4>
+            <h6 class="card-subtitle">
+              Hospitales registrados en mi aplicación
+            </h6>
+          </div>
+
+          <div class="col">
+            <div class="text-right">
+              <button class="btn btn-primary">
+                <i class="fa fa-hospital-o"></i>
+                Crear hospital
+              </button>
+            </div>
+          </div>
+        </div>
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
