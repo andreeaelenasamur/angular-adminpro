@@ -79,7 +79,6 @@ export class PerfilComponent implements OnInit{
         console.log(err)
         Swal.fire('Error' , 'No se pudo subir la imagen', 'error');
       })
-
   }
 
 
