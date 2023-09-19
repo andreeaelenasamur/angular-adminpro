@@ -61,7 +61,9 @@
                                 <a [routerLink]="['/dashboard', 'medico', medico.uid]" data-toggle="tooltip" data-original-title="Editar">
                                    <i class="fa fa-pencil text-inverse m-r-10"></i>
                                 </a>
-                                <a href="#" data-toggle="tooltip" data-original-title="Borrar"> <i class="fa fa-close text-danger"></i> </a>
+                                <a class="cursor" data-toggle="tooltip" data-original-title="Borrar" (click)="borrarMedico(medico)">
+                                   <i class="fa fa-close text-danger"></i>
+                                </a>
                             </td>
                         </tr>
                     </tbody>
