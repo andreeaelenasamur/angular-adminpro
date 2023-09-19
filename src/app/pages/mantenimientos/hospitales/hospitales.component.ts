@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription, delay } from 'rxjs';
 import Swal from 'sweetalert2';
 
-import { HospitalService } from 'src/app/services/hospital.service';
 import { Hospital } from 'src/app/models/hospital.model';
+import { HospitalService } from 'src/app/services/hospital.service';
 import { ModalImagenService } from 'src/app/services/modal-imagen.service';
+import { BusquedasService } from 'src/app/services/busquedas.service';
 
 @Component({
   selector: 'app-hospitales',
@@ -15,13 +16,14 @@ import { ModalImagenService } from 'src/app/services/modal-imagen.service';
 export class HospitalesComponent implements OnInit{
 
   public hospitales: Hospital[] = [];
+  // public hospitalesTemp: Hospital[] = [];
   public cargando: boolean = true;
   private imgSubs: Subscription;
 
   constructor(
     private hospitalService: HospitalService,
-    private modalImagenService: ModalImagenService
-
+    private modalImagenService: ModalImagenService,
+    private busquedasService: BusquedasService,
     ) {}
 
   ngOnInit(): void {
@@ -41,8 +43,9 @@ export class HospitalesComponent implements OnInit{
 
     this.hospitalService.cargarHospitales()
     .subscribe( hospitales => {
-      this.cargando = false;
       this.hospitales = hospitales;
+      // this.hospitalesTemp = hospitales;
+      this.cargando = false;
     })
 
   }
@@ -65,7 +68,7 @@ export class HospitalesComponent implements OnInit{
   }
 
   async abrirSweetAlert() {
-    const { value } = await Swal.fire<string>({
+    const { value = '' } = await Swal.fire<string>({
       title: 'Crear hospital',
       text: 'Ingrese el nombre del nuevo hospital',
       input: 'text',
@@ -83,6 +86,18 @@ export class HospitalesComponent implements OnInit{
 
   abrirModal(hospital: Hospital){
     this.modalImagenService.abrirModal('hospitales', hospital.uid, hospital.img);
+  }
+
+  buscar( termino: string):any {
+
+    if( termino.length === 0 ){
+      return this.cargarHospitales();
+    }
+
+    this.busquedasService.buscar('hospitales', termino)
+      .subscribe( resp =>
+        this.hospitales = resp
+      );
   }
 
 
