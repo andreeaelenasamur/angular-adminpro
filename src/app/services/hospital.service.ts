@@ -48,7 +48,7 @@ export class HospitalService {
 
   borrarHospital( _id: string ) {
     const url = `${base_url}/hospitales/${_id}`;
-    return this.http.put( url, this.headers );
+    return this.http.delete( url, this.headers );
   }
 
 }
