@@ -8,6 +8,7 @@ import { Hospital } from 'src/app/models/hospital.model';
 
 import { HospitalService } from 'src/app/services/hospital.service';
 import { MedicoService } from 'src/app/services/medico.service';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-medico',
@@ -34,7 +35,9 @@ export class MedicoComponent implements OnInit{
   ngOnInit(): void {
 
     this.activatedRoute.params.
-      subscribe(({id}) => { this.cargarMedico(id) })
+      subscribe(({id}) => {
+        this.cargarMedico(id)
+    })
 
     this.medicoForm = this.fb.group({
       nombre: ['', Validators.required],
@@ -56,6 +59,9 @@ export class MedicoComponent implements OnInit{
     }
 
     this.medicoService.obtenerMedicoPorId(id)
+      .pipe(
+        delay(100)
+      )
       .subscribe( (medico:  any) => {
         if( !medico ) {
           this.router.navigateByUrl(`/dashboard/medicos`)
