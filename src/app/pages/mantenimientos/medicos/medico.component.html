@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col">
+  <div class="col-md-6">
     <div class="card">
         <div class="card-body">
 
@@ -53,14 +53,14 @@
     </div>
   </div>
 
-  <div class="col">
+  <div class="col animated fadeIn fast" *ngIf="hospitalSeleccionado">
     <div class="card">
       <div class="card-body">
 
           <h4 class="card-title">Hospital</h4>
-          <h6 class="card-subtitle">Hospital asignado</h6>
+          <h6 class="card-subtitle">{{hospitalSeleccionado.nombre}}</h6>
 
-          <img src="http://localhost:3000/api/upload/usuarios/no-image" class="w200">
+          <img [src]="hospitalSeleccionado.img | imagen:'hospitales'" class="img-thumbnail w-75">
 
       </div>
     </div>
