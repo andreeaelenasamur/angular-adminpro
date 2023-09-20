@@ -7,11 +7,11 @@
             <h6 class="card-subtitle">Actualizar información</h6>
 
             <form class="form-horizontal p-t-20" [formGroup]="medicoForm" (submit)="guardarMedico()">
-                  <div class="form-group row">
+                  <div class="form-group row" *ngIf="medicoSeleccionado">
                     <label for="exampleInputuname3" class="col-sm-3 control-label">Foto</label>
                     <div class="col-sm-9">
                         <div class="input-group">
-                          <img src="http://localhost:3000/api/upload/usuarios/no-image" class="w200">
+                          <img [src]="medicoSeleccionado.img | imagen:'medicos'" class="w200">
                         </div>
                     </div>
                 </div>
