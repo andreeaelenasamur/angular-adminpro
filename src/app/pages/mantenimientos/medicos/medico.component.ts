@@ -50,11 +50,22 @@ export class MedicoComponent implements OnInit{
   }
 
   cargarMedico(id: string) {
+
+    if( id === 'nuevo' ) {
+      return;
+    }
+
     this.medicoService.obtenerMedicoPorId(id)
-      .subscribe( (medico: any ) => {
-        console.log(medico)
+      .subscribe( (medico:  any) => {
+        if( !medico ) {
+          this.router.navigateByUrl(`/dashboard/medicos`)
+        }
+
+        const { nombre, hospital: {_id}} = medico;
         this.medicoSeleccionado = medico;
-      })
+        this.medicoForm.setValue({ nombre, hospital: _id });
+      });
+
 
   }
 
@@ -66,14 +77,30 @@ export class MedicoComponent implements OnInit{
   }
 
   guardarMedico() {
+
     const { nombre } = this.medicoForm.value;
 
-    this.medicoService.crearMedico( this.medicoForm.value )
-      .subscribe( (resp: any) =>{
-        console.log(resp);
-        Swal.fire('Creado', `${nombre} creado correctamente`, 'success');
-        this.router.navigateByUrl(`dashboard/medico/${resp.medico.uid}`)
-      })
+    if( this.medicoSeleccionado ) {
+      // actualizar
+      const data = {
+        ...this.medicoForm.value,
+        uid: this.medicoSeleccionado.uid
+      }
+      this.medicoService.actualizarMedico( data )
+        .subscribe( resp => {
+          console.log(resp)
+          Swal.fire('Actualizado', `${nombre} actualizado correctamente`, 'success');
+        })
+
+
+    } else {
+      // crear
+        this.medicoService.crearMedico( this.medicoForm.value )
+          .subscribe( (resp: any) =>{
+            Swal.fire('Creado', `${nombre} creado correctamente`, 'success');
+            this.router.navigateByUrl(`/dashboard/medico/${resp.medico.uid}`)
+          })
+    }
   }
 
 
