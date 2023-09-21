@@ -16,6 +16,7 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
 import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
 import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
 import { MedicoComponent } from './mantenimientos/medicos/medico.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent, data: { titulo: 'Dashboard' } },
       { path: 'progress', component: ProgressComponent, data: { titulo: 'ProgressBar' } },
+      { path: 'buscar/:termino', component: BusquedaComponent, data: { titulo: 'Busquedas' } },
       { path: 'grafica1', component: Grafica1Component, data: { titulo: 'Gráfica #1' } },
       { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes de cuenta' } },
       { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas' } },
