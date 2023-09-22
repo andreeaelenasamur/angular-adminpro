@@ -12,7 +12,6 @@ export const authGuard: CanActivateFn = (route, state) => {
   return usuarioService.validarToken()
     .pipe(
       tap( estaAutenticado => {
-
         if ( !estaAutenticado ) {
           router.navigateByUrl('/login');
         }
